@@ -1,3 +1,17 @@
+<style>
+
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+
+</style>
+
+
 <?php
 
 //turn on debugging messages
@@ -32,13 +46,10 @@ class database
      {
         new database;
      }
-
      return self::$conn;
 
  }
 }
-
-
 class collection
 {
     static function findAll()
@@ -52,7 +63,6 @@ class collection
         $stmt->setFetchMode(PDO::FETCH_CLASS,$class);
         $result= $stmt->fetchAll();
         return $result;
-
     }
     static function findOne($id)
     {
@@ -77,10 +87,10 @@ class collection
         $class = static::$modelName;
         $stmt->setFetchMode(PDO::FETCH_CLASS,$class);
         $result= $stmt->fetchAll();
+        echo '<br>';
+        echo 'The number of rows returned is '.$stmt->rowCount();
         return $result;
-
     }
-
 }
 
 class accounts extends collection
@@ -109,9 +119,9 @@ class htmlTable
         }
 
 }
-
-
     $obj = new accounts;
     $result = $obj -> findOneLessThan(6);
+  //  echo 'The number of rows returned is '.$stmt->rowCount();
+    echo '<br>';
    $tab = new htmlTable;
    $tab->makeTable($result);
